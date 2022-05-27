@@ -6,36 +6,19 @@ import {
   TextInput,
   TouchableOpacity,
   Keyboard,
+  Pressable,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { firebase } from "../config";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 
 const HomeScreen = () => {
   const [todos, setTodos] = useState([]);
   const todoRef = firebase.firestore().collection("todos");
   const [addData, setAddData] = useState("");
   const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <TextInput
-          style={style.input}
-          placeholder="Tambahkan kegiatan baru"
-          placeholderTextColor="#aaaaaa"
-          onChangeText={(heading) => setAddData(heading)}
-          value={addData}
-          underlineColorAndroid="transparent"
-          autoCapitalize="none"
-        ></TextInput>
-        <TouchableOpacity style={styles.button} onPress={addToDo}>
-          <Text style={styles.buttonText}>Add</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
 
   useEffect(() => {
     todoRef.orderBy("createdAt", "desc").onSnapshot((querySnapshot) => {
@@ -55,7 +38,7 @@ const HomeScreen = () => {
       .then(() => {
         alert("Hapus berhasil");
       })
-      .cacth((error) => {
+      .cacth(error => {
         alert(error);
       });
   };
@@ -79,6 +62,49 @@ const HomeScreen = () => {
         });
     }
   };
+
+  return (
+    <View style={{ flex: 1 }}>
+      <View style={styles.formContainer}>
+        <TextInput
+          style={style.input}
+          placeholder="Tambahkan kegiatan baru"
+          placeholderTextColor="#aaaaaa"
+          onChangeText={(heading) => setAddData(heading)}
+          value={addData}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        ></TextInput>
+        <TouchableOpacity style={styles.button} onPress={addToDo}>
+          <Text style={styles.buttonText}>Add</Text>
+        </TouchableOpacity>
+      </View>
+      <FlatList
+        data={todos}
+        numColumns={1}
+        renderItem={({ item }) => (
+          <View>
+            <Pressable
+              style={styles.container}
+              onPress={() => navigation.navigate("Detail", { item })}
+            >
+              <FontAwesome
+                name="trash-o"
+                color="red"
+                onPress={() => deleteToDo(item)}
+                style={styles.todoIcon}
+              />
+              <View style={styles.innerContainer}>
+                <Text style = {styles.itemHeading} >
+                    {item.heading[0].toUpperCase() + item.heading.slice(1)}
+                </Text>
+              </View>
+            </Pressable>
+          </View>
+        )}
+      ></FlatList>
+    </View>
+  );
 };
 
 export default HomeScreen;
