@@ -19,8 +19,10 @@ const HomeScreen = () => {
   const navigation = useNavigation();
 
   return (
-    <View>
-      <Text>Home Screen</Text>
+    <View style={{ flex: 1 }}>
+      <View style={styles.container}>
+       
+      </View>
     </View>
   );
 
@@ -34,6 +36,7 @@ const HomeScreen = () => {
       setTodos(todos);
     });
   }, []);
+
   const deleteToDo = (todos) => {
     todoRef
       .doc(todos.id)
@@ -44,6 +47,26 @@ const HomeScreen = () => {
       .cacth((error) => {
         alert(error);
       });
+  };
+
+  const addToDo = (todos) => {
+    if (addData && addData.length > 0) {
+      //   cek apa kita punya todo
+      const timestamp = firebase.firestore.FieldValue.serverTimestamp(); // ambil waktu server
+      const data = {
+        heading: addData,
+        createdAt: timestamp,
+      };
+      todoRef
+        .add(data)
+        .then(() => {
+          setAddData("");
+          Keyboard.dismiss(); // kyboard dismiss it
+        })
+        .cacth((error) => {
+          alert(error);
+        });
+    }
   };
 };
 
