@@ -21,7 +21,18 @@ const HomeScreen = () => {
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.container}>
-       
+        <TextInput
+          style={style.input}
+          placeholder="Tambahkan kegiatan baru"
+          placeholderTextColor="#aaaaaa"
+          onChangeText={(heading) => setAddData(heading)}
+          value={addData}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        ></TextInput>
+        <TouchableOpacity style={styles.button} onPress={addToDo}>
+          <Text style={styles.buttonText}>Add</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
