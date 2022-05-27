@@ -12,7 +12,6 @@ import React, { useState, useEffect } from "react";
 import { firebase } from "../config";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 
 const HomeScreen = () => {
   const [todos, setTodos] = useState([]);
@@ -67,7 +66,7 @@ const HomeScreen = () => {
     <View style={{ flex: 1 }}>
       <View style={styles.formContainer}>
         <TextInput
-          style={style.input}
+          style={styles.input}
           placeholder="Tambahkan kegiatan baru"
           placeholderTextColor="#aaaaaa"
           onChangeText={(heading) => setAddData(heading)}
