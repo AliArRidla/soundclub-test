@@ -17,6 +17,19 @@ const HomeScreen = () => {
         </View>
     )
 
+
+    useEffect(()=>{
+        todoRef.orderBy("createdAt","desc").onSnapshot(querySnapshot=>{
+            const todos = [];
+            querySnapshot.forEach(doc=>{
+                const {heading} = doc.data();
+                todos.push({id:doc.id,heading});
+            });
+            setTodos(todos);
+        });
+    },[])
+    
+
 }
 
 export default HomeScreen
