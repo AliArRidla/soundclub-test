@@ -28,7 +28,9 @@ const HomeScreen = () => {
             setTodos(todos);
         });
     },[])
-    
+    const deleteToDo=(todos)=>{
+        todoRef.doc(todos.id).delete().then;
+    }
 
 }
 
