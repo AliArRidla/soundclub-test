@@ -30,6 +30,7 @@ const HomeScreen = () => {
     });
   }, []);
 
+  //   delete method
   const deleteToDo = (todos) => {
     todoRef
       .doc(todos.id)
@@ -42,6 +43,7 @@ const HomeScreen = () => {
       });
   };
 
+  //   add function
   const addToDo = () => {
     if (addData && addData.length > 0) {
       //   cek apa kita punya todo
@@ -53,14 +55,14 @@ const HomeScreen = () => {
       todoRef
         .add(data)
         .then(() => {
-            setAddData('');
-            Keyboard.dismiss(); // kyboard dismiss it
+          setAddData("");
+          Keyboard.dismiss(); // kyboard dismiss it
         })
         .cacth((error) => {
           alert(error);
-        })
+        });
     }
-  }
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -159,6 +161,5 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
   },
-  todoIcon: { marginTop: 5, fontSize: 20, marginleft: 14, },
-  
+  todoIcon: { marginTop: 5, fontSize: 20, marginleft: 14 },
 });
