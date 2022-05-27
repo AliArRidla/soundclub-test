@@ -42,7 +42,7 @@ const HomeScreen = () => {
       });
   };
 
-  const addToDo = (todos) => {
+  const addToDo = () => {
     if (addData && addData.length > 0) {
       //   cek apa kita punya todo
       const timestamp = firebase.firestore.FieldValue.serverTimestamp(); // ambil waktu server
@@ -53,14 +53,14 @@ const HomeScreen = () => {
       todoRef
         .add(data)
         .then(() => {
-          setAddData("");
-          Keyboard.dismiss(); // kyboard dismiss it
+            setAddData('');
+            Keyboard.dismiss(); // kyboard dismiss it
         })
         .cacth((error) => {
           alert(error);
-        });
+        })
     }
-  };
+  }
 
   return (
     <View style={{ flex: 1 }}>
