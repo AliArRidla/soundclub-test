@@ -38,7 +38,7 @@ const HomeScreen = () => {
       .then(() => {
         alert("Hapus berhasil");
       })
-      .cacth(error => {
+      .cacth((error) => {
         alert(error);
       });
   };
@@ -95,8 +95,8 @@ const HomeScreen = () => {
                 style={styles.todoIcon}
               />
               <View style={styles.innerContainer}>
-                <Text style = {styles.itemHeading} >
-                    {item.heading[0].toUpperCase() + item.heading.slice(1)}
+                <Text style={styles.itemHeading}>
+                  {item.heading[0].toUpperCase() + item.heading.slice(1)}
                 </Text>
               </View>
             </Pressable>
@@ -108,3 +108,58 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#e5e5e5",
+    margin: 5,
+    padding: 15,
+    borderRadius: 15,
+    marginHorizontal: 10,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  innerContainer: {
+    alignItems: "center",
+    flexDirection: "column",
+    marginLeft: 45,
+  },
+  itemHeading: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginRight: 22,
+  },
+  formContainer: {
+    flexDirection: "row",
+    height: 80,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 100,
+  },
+  input: {
+    height: 48,
+    borderRadius: 5,
+    overflow: "hidden",
+    backgroundColor: "white",
+    paddingLeft: 16,
+    flex: 1,
+    marginRight: 5,
+  },
+
+  button: {
+    height: 47,
+    borderRadius: 5,
+    backgroundColor: "#788eec",
+    width: 80,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  buttonText: {
+    color: "white",
+    fontSize: 20,
+  },
+  todoIcon: { marginTop: 5, fontSize: 20, marginleft: 14, },
+  
+});
